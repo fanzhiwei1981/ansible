@@ -1,4 +1,8 @@
 #!/usr/bin/python
+
+# Author: fan.zhiwei@qq.com
+# purpose: auto create zookeeper cluster on auto-created EC2 instances
+# Jul 2015
 conf='ansible.cfg'
 import sys
 import os
