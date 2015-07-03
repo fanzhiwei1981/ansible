@@ -4,6 +4,7 @@ Prerequisity:
 1, boto3 python module
 2, aws authentication in ~/.aws/credentials
 3, aws region configuration in ~/.aws/config
+4, update ansible.cfg before you run the script
 
 Examples:
 [ec2-user@ip-172-31-24-63 ansible]$ python ansible.py
