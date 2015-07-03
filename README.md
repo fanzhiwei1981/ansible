@@ -7,6 +7,8 @@ Prerequisity:
 4, update ansible.cfg before you run the script
 5, the script use ssh to remote execute, you shall allow ssh network traffic by default
 
+#tested with Redhat AMI
+
 Examples:
 [ec2-user@ip-172-31-24-63 ansible]$ python ansible.py
 2015-07-03 07:45:07 : starting to provision 3 EC instance
