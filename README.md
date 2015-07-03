@@ -5,6 +5,7 @@ Prerequisity:
 2, aws authentication in ~/.aws/credentials
 3, aws region configuration in ~/.aws/config
 4, update ansible.cfg before you run the script
+5, the script use ssh to remote execute, you shall allow ssh network traffic by default
 
 Examples:
 [ec2-user@ip-172-31-24-63 ansible]$ python ansible.py
