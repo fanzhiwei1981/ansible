@@ -1,6 +1,6 @@
 # ansible
 
-# Prerequisity:
+#Prerequisity:
 1, boto3 python module
 2, aws authentication in ~/.aws/credentials
 3, aws region configuration in ~/.aws/config
@@ -43,4 +43,3 @@ Connected in 10 ms, handle is 3
 Connecting to 172.31.45.2:2181
 Connected in 11 ms, handle is 0
 Smoke test successful
-
