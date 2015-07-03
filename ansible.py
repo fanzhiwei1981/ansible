@@ -29,12 +29,13 @@ jre=configs['jre']
 java_home=configs['java_home']
 smoketest=configs['smoketest']
 stfolder=smoketest.replace('.zip','')
+workdir=configs['workdir']
 if not int(number_of_node) % 2 or int(number_of_node) < 3:
 	printmsg("number of node must be bigger than 3 and odd")
 	sys.exit()
 
 cfgfile.close()
-home=os.environ['HOME']
+#home=os.environ['HOME']
 
 def printmsg(msg):
 	timestamp=str(datetime.datetime.now()).split('.')[0]
@@ -91,7 +92,8 @@ for instance in newInstances:
 		ip=instance.private_ip_address
 		id=instance.instance_id
 		printmsg('checking ssh access for servers ' + ip + " " + id)
-		cmd=SSH + ip + ' hostname > /dev/null 2>&1'
+		#cmd=SSH + ip + ' hostname > /dev/null 2>&1'
+		cmd=SSH + ip + " mkdir -p " + zkfolder  + " > /dev/null 2>&1 "
 		if os.system(cmd) !=0:
 			printmsg("error while trying to test ssh login to servers" + ip + " " + id)
 			time.sleep(60)
@@ -137,7 +139,7 @@ for instance in newInstances:
 	ip=instance.private_ip_address
 	id=instance.instance_id
 	printmsg("beginning install the package on the destination server:" + ip+" "+id )
-	cmd=SSH + ip + " \'cd;/usr/bin/tar -xzvf " + zk + " > /dev/null 2>&1\'"
+	cmd=SSH + ip + " \'cd " + workdir +";/usr/bin/tar -xzvf " + zk + " > /dev/null 2>&1\'"
 	if os.system(cmd) !=0:
 		printmsg('error while extracting the tar file'  + ip + " " + id + " " + zk)
 		sys.exit()
@@ -175,7 +177,7 @@ if os.system(cmd) !=0:
 	sys.exit()
 
 printmsg("using zk-smoketest to test the zookeeper service on the server:" + ip+" "+id )
-cmd1="cd " + home +";"
+cmd1="cd " + workdir +";"
 cmd2="unzip " + smoketest + "> /dev/null 2>&1;"
 cmd3="cd " + stfolder + ";"
 cmd4="PYTHONPATH=lib.linux-x86_64-2.6 LD_LIBRARY_PATH=lib.linux-x86_64-2.6 ./zk-smoketest.py --config "    + zkfolder + "/conf/" + zkfile 
