@@ -1,6 +1,6 @@
 # ansible
 
-#Prerequisity:
+# Prerequisity:
 1, boto3 python module
 2, aws authentication in ~/.aws/credentials
 3, aws region configuration in ~/.aws/config
