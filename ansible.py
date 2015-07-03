@@ -43,7 +43,8 @@ def printmsg(msg):
 
 
 
-SSH="/usr/bin/ssh -n -o ConnectTimeout=5 -o StrictHostKeyChecking=no -i " + ssh_key_file + " "
+SSH="/usr/bin/ssh -o ConnectTimeout=5 -o StrictHostKeyChecking=no -i " + ssh_key_file + " "
+SSH1="/usr/bin/ssh -t -o ConnectTimeout=5 -o StrictHostKeyChecking=no -i " + ssh_key_file + " "
 SCP="/usr/bin/scp -i " + ssh_key_file + " " 
 
 #create ec2 conneciton
@@ -145,7 +146,7 @@ for instance in newInstances:
 		sys.exit()
 	cmd=SSH + ip + " \'java -version > /dev/null 2>&1\'"
 	if os.system(cmd) !=0:
-		cmd=SSH + ip + " \'sudo su - -c rpm -ivh " + jre + "\'"
+		cmd=SSH1 + ip + " \'sudo  rpm -ivh " + jre + " \' > /dev/null 2>&1"
 		if os.system(cmd) !=0:
 			printmsg('error while installing the java '  + ip + " " + id + " " + jre)
 			sys.exit()
@@ -177,6 +178,14 @@ if os.system(cmd) !=0:
 	sys.exit()
 
 printmsg("using zk-smoketest to test the zookeeper service on the server:" + ip+" "+id )
+cmd=SSH + ip + " \'which unzip> /dev/null 2>&1\'"
+if os.system(cmd) !=0:
+	printmsg("installing unzip on destination server:" + ip+" "+id)
+	cmd=SSH1 + ip + " \'sudo yum -y install unzip.x86_64 \' > /dev/null 2>&1"
+	if os.system(cmd) !=0:
+		printmsg("error installing unzip")
+		sys.exit()
+	
 cmd1="cd " + workdir +";"
 cmd2="unzip " + smoketest + "> /dev/null 2>&1;"
 cmd3="cd " + stfolder + ";"
