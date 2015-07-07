@@ -1,0 +1,71 @@
+---
+- hosts: controlServer
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: provision 3 new EC instances
+      ec2:
+          key_name: ams_afan
+          instance_type: t2.micro
+          region: us-west-2
+          image: ami-d5f4f2e5
+          wait: yes
+          exact_count: 3
+          count_tag: 
+              name: Demo
+      register: ec2
+
+    - name: Add all instance public IPs to host group
+      add_host: hostname={{ item.private_ip }} groups=newInstances
+      with_items: ec2.instances
+
+    - name: Wait for SSH to come up
+      wait_for: host={{ item.private_ip }} port=22 delay=30 timeout=320 state=started
+      with_items: ec2.instances
+
+    - name: Generate zookeeper configuration files
+      template: src=/home/ec2-user/ansible/zoo.cfg dest=/tmp/zoo.cfg backup=yes
+      with_items: ec2.instances
+
+
+    - name: Generate myid file
+      shell: echo "{{ item.ami_launch_index|int + 1  }}" > /tmp/{{ item.private_ip }}.myid
+      with_items: ec2.instances
+
+
+- hosts: newInstances
+  gather_facts: false
+  tasks:
+
+    - name: unpack the zookeepr to destination servers
+      unarchive: src=/home/ec2-user/zookeeper-3.4.6.tar.gz dest=/home/ec2-user copy=yes
+
+    - name: unpack the smoketest to destination servers
+      unarchive: src=/home/ec2-user/zk-smoketest-master.zip dest=/home/ec2-user copy=yes
+
+    - name: copy the configuration file to the detination servers
+      copy: src=/tmp/zoo.cfg dest=/home/ec2-user/zookeeper-3.4.6/conf/zoo.cfg
+
+    - name: create zookeeper data dir
+      shell: mkdir -p /home/ec2-user/zookeeper-3.4.6/dataDir
+
+    - name: copy the my id file to the detination servers
+      copy: src=/tmp/{{ hostvars[inventory_hostname]['inventory_hostname'] }}.myid dest=/home/ec2-user/zookeeper-3.4.6/dataDir/myid
+
+    - name: start zookeeper service
+      shell: /home/ec2-user/zookeeper-3.4.6/bin/zkServer.sh start
+
+    - pause: seconds=120
+
+- hosts: newInstances[0]
+  gather_facts: false
+  tasks:
+
+    - name: use smoketest to validate zookeeper
+      shell: cd /home/ec2-user/zk-smoketest-master; PYTHONPATH=lib.linux-x86_64-2.6 LD_LIBRARY_PATH=lib.linux-x86_64-2.6 ./zk-smoketest.py --config /home/ec2-user/zookeeper-3.4.6/conf/zoo.cfg
+      register: result
+
+    - debug: msg="{{ result.stdout }}"
+
+
