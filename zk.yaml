@@ -1,4 +1,3 @@
----
 - hosts: controlServer
   connection: local
   gather_facts: false
@@ -16,22 +15,26 @@
               name: Demo
       register: ec2
 
-    - name: Add all instance public IPs to host group
+    - name: Add all instance private IPs to host group
       add_host: hostname={{ item.private_ip }} groups=newInstances
       with_items: ec2.instances
+      no_log: true
 
     - name: Wait for SSH to come up
       wait_for: host={{ item.private_ip }} port=22 delay=30 timeout=320 state=started
       with_items: ec2.instances
+      no_log: true
 
     - name: Generate zookeeper configuration files
       template: src=/home/ec2-user/ansible/zoo.cfg dest=/tmp/zoo.cfg backup=yes
       with_items: ec2.instances
+      no_log: true
 
 
     - name: Generate myid file
       shell: echo "{{ item.ami_launch_index|int + 1  }}" > /tmp/{{ item.private_ip }}.myid
       with_items: ec2.instances
+      no_log: true
 
 
 - hosts: newInstances
@@ -56,11 +59,13 @@
     - name: start zookeeper service
       shell: /home/ec2-user/zookeeper-3.4.6/bin/zkServer.sh start
 
-    - pause: seconds=120
 
 - hosts: newInstances[0]
   gather_facts: false
   tasks:
+
+    - pause: seconds=120
+      no_log: true
 
     - name: use smoketest to validate zookeeper
       shell: cd /home/ec2-user/zk-smoketest-master; PYTHONPATH=lib.linux-x86_64-2.6 LD_LIBRARY_PATH=lib.linux-x86_64-2.6 ./zk-smoketest.py --config /home/ec2-user/zookeeper-3.4.6/conf/zoo.cfg
