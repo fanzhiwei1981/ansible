@@ -1,0 +1,80 @@
+
+PLAY [controlServer] ********************************************************** 
+
+TASK: [provision 3 new EC instances] ****************************************** 
+changed: [127.0.0.1]
+
+TASK: [Add all instance public IPs to host group] ***************************** 
+ok: [127.0.0.1] => (item={u'ramdisk': None, u'kernel': None, u'root_device_type': u'ebs', u'private_dns_name': u'ip-172-31-25-14.us-west-2.compute.internal', u'tags': {}, u'key_name': u'ams_afan', u'public_ip': u'52.10.164.46', u'image_id': u'ami-d5f4f2e5', u'tenancy': u'default', u'private_ip': u'172.31.25.14', u'groups': {u'sg-75639a11': u'default'}, u'public_dns_name': u'ec2-52-10-164-46.us-west-2.compute.amazonaws.com', u'state_code': 16, u'id': u'i-b74a4d40', u'placement': u'us-west-2a', u'ami_launch_index': u'2', u'dns_name': u'ec2-52-10-164-46.us-west-2.compute.amazonaws.com', u'region': u'us-west-2', u'ebs_optimized': False, u'launch_time': u'2015-07-07T03:24:27.000Z', u'instance_type': u't2.micro', u'state': u'running', u'root_device_name': u'/dev/sda1', u'hypervisor': u'xen', u'virtualization_type': u'hvm', u'architecture': u'x86_64'})
+ok: [127.0.0.1] => (item={u'ramdisk': None, u'kernel': None, u'root_device_type': u'ebs', u'private_dns_name': u'ip-172-31-25-13.us-west-2.compute.internal', u'tags': {}, u'key_name': u'ams_afan', u'public_ip': u'52.25.233.47', u'image_id': u'ami-d5f4f2e5', u'tenancy': u'default', u'private_ip': u'172.31.25.13', u'groups': {u'sg-75639a11': u'default'}, u'public_dns_name': u'ec2-52-25-233-47.us-west-2.compute.amazonaws.com', u'state_code': 16, u'id': u'i-b64a4d41', u'placement': u'us-west-2a', u'ami_launch_index': u'1', u'dns_name': u'ec2-52-25-233-47.us-west-2.compute.amazonaws.com', u'region': u'us-west-2', u'ebs_optimized': False, u'launch_time': u'2015-07-07T03:24:27.000Z', u'instance_type': u't2.micro', u'state': u'running', u'root_device_name': u'/dev/sda1', u'hypervisor': u'xen', u'virtualization_type': u'hvm', u'architecture': u'x86_64'})
+ok: [127.0.0.1] => (item={u'ramdisk': None, u'kernel': None, u'root_device_type': u'ebs', u'private_dns_name': u'ip-172-31-25-12.us-west-2.compute.internal', u'tags': {}, u'key_name': u'ams_afan', u'public_ip': u'52.25.24.80', u'image_id': u'ami-d5f4f2e5', u'tenancy': u'default', u'private_ip': u'172.31.25.12', u'groups': {u'sg-75639a11': u'default'}, u'public_dns_name': u'ec2-52-25-24-80.us-west-2.compute.amazonaws.com', u'state_code': 16, u'id': u'i-b54a4d42', u'placement': u'us-west-2a', u'ami_launch_index': u'0', u'dns_name': u'ec2-52-25-24-80.us-west-2.compute.amazonaws.com', u'region': u'us-west-2', u'ebs_optimized': False, u'launch_time': u'2015-07-07T03:24:27.000Z', u'instance_type': u't2.micro', u'state': u'running', u'root_device_name': u'/dev/sda1', u'hypervisor': u'xen', u'virtualization_type': u'hvm', u'architecture': u'x86_64'})
+
+TASK: [Wait for SSH to come up] *********************************************** 
+ok: [127.0.0.1] => (item={u'ramdisk': None, u'kernel': None, u'root_device_type': u'ebs', u'private_dns_name': u'ip-172-31-25-14.us-west-2.compute.internal', u'tags': {}, u'key_name': u'ams_afan', u'public_ip': u'52.10.164.46', u'image_id': u'ami-d5f4f2e5', u'tenancy': u'default', u'private_ip': u'172.31.25.14', u'groups': {u'sg-75639a11': u'default'}, u'public_dns_name': u'ec2-52-10-164-46.us-west-2.compute.amazonaws.com', u'state_code': 16, u'id': u'i-b74a4d40', u'placement': u'us-west-2a', u'ami_launch_index': u'2', u'dns_name': u'ec2-52-10-164-46.us-west-2.compute.amazonaws.com', u'region': u'us-west-2', u'ebs_optimized': False, u'launch_time': u'2015-07-07T03:24:27.000Z', u'instance_type': u't2.micro', u'state': u'running', u'root_device_name': u'/dev/sda1', u'hypervisor': u'xen', u'virtualization_type': u'hvm', u'architecture': u'x86_64'})
+ok: [127.0.0.1] => (item={u'ramdisk': None, u'kernel': None, u'root_device_type': u'ebs', u'private_dns_name': u'ip-172-31-25-13.us-west-2.compute.internal', u'tags': {}, u'key_name': u'ams_afan', u'public_ip': u'52.25.233.47', u'image_id': u'ami-d5f4f2e5', u'tenancy': u'default', u'private_ip': u'172.31.25.13', u'groups': {u'sg-75639a11': u'default'}, u'public_dns_name': u'ec2-52-25-233-47.us-west-2.compute.amazonaws.com', u'state_code': 16, u'id': u'i-b64a4d41', u'placement': u'us-west-2a', u'ami_launch_index': u'1', u'dns_name': u'ec2-52-25-233-47.us-west-2.compute.amazonaws.com', u'region': u'us-west-2', u'ebs_optimized': False, u'launch_time': u'2015-07-07T03:24:27.000Z', u'instance_type': u't2.micro', u'state': u'running', u'root_device_name': u'/dev/sda1', u'hypervisor': u'xen', u'virtualization_type': u'hvm', u'architecture': u'x86_64'})
+ok: [127.0.0.1] => (item={u'ramdisk': None, u'kernel': None, u'root_device_type': u'ebs', u'private_dns_name': u'ip-172-31-25-12.us-west-2.compute.internal', u'tags': {}, u'key_name': u'ams_afan', u'public_ip': u'52.25.24.80', u'image_id': u'ami-d5f4f2e5', u'tenancy': u'default', u'private_ip': u'172.31.25.12', u'groups': {u'sg-75639a11': u'default'}, u'public_dns_name': u'ec2-52-25-24-80.us-west-2.compute.amazonaws.com', u'state_code': 16, u'id': u'i-b54a4d42', u'placement': u'us-west-2a', u'ami_launch_index': u'0', u'dns_name': u'ec2-52-25-24-80.us-west-2.compute.amazonaws.com', u'region': u'us-west-2', u'ebs_optimized': False, u'launch_time': u'2015-07-07T03:24:27.000Z', u'instance_type': u't2.micro', u'state': u'running', u'root_device_name': u'/dev/sda1', u'hypervisor': u'xen', u'virtualization_type': u'hvm', u'architecture': u'x86_64'})
+
+TASK: [Generate zookeeper configuration files] ******************************** 
+changed: [127.0.0.1] => (item={u'ramdisk': None, u'kernel': None, u'root_device_type': u'ebs', u'private_dns_name': u'ip-172-31-25-14.us-west-2.compute.internal', u'tags': {}, u'key_name': u'ams_afan', u'public_ip': u'52.10.164.46', u'image_id': u'ami-d5f4f2e5', u'tenancy': u'default', u'private_ip': u'172.31.25.14', u'groups': {u'sg-75639a11': u'default'}, u'public_dns_name': u'ec2-52-10-164-46.us-west-2.compute.amazonaws.com', u'state_code': 16, u'id': u'i-b74a4d40', u'placement': u'us-west-2a', u'ami_launch_index': u'2', u'dns_name': u'ec2-52-10-164-46.us-west-2.compute.amazonaws.com', u'region': u'us-west-2', u'ebs_optimized': False, u'launch_time': u'2015-07-07T03:24:27.000Z', u'instance_type': u't2.micro', u'state': u'running', u'root_device_name': u'/dev/sda1', u'hypervisor': u'xen', u'virtualization_type': u'hvm', u'architecture': u'x86_64'})
+ok: [127.0.0.1] => (item={u'ramdisk': None, u'kernel': None, u'root_device_type': u'ebs', u'private_dns_name': u'ip-172-31-25-13.us-west-2.compute.internal', u'tags': {}, u'key_name': u'ams_afan', u'public_ip': u'52.25.233.47', u'image_id': u'ami-d5f4f2e5', u'tenancy': u'default', u'private_ip': u'172.31.25.13', u'groups': {u'sg-75639a11': u'default'}, u'public_dns_name': u'ec2-52-25-233-47.us-west-2.compute.amazonaws.com', u'state_code': 16, u'id': u'i-b64a4d41', u'placement': u'us-west-2a', u'ami_launch_index': u'1', u'dns_name': u'ec2-52-25-233-47.us-west-2.compute.amazonaws.com', u'region': u'us-west-2', u'ebs_optimized': False, u'launch_time': u'2015-07-07T03:24:27.000Z', u'instance_type': u't2.micro', u'state': u'running', u'root_device_name': u'/dev/sda1', u'hypervisor': u'xen', u'virtualization_type': u'hvm', u'architecture': u'x86_64'})
+ok: [127.0.0.1] => (item={u'ramdisk': None, u'kernel': None, u'root_device_type': u'ebs', u'private_dns_name': u'ip-172-31-25-12.us-west-2.compute.internal', u'tags': {}, u'key_name': u'ams_afan', u'public_ip': u'52.25.24.80', u'image_id': u'ami-d5f4f2e5', u'tenancy': u'default', u'private_ip': u'172.31.25.12', u'groups': {u'sg-75639a11': u'default'}, u'public_dns_name': u'ec2-52-25-24-80.us-west-2.compute.amazonaws.com', u'state_code': 16, u'id': u'i-b54a4d42', u'placement': u'us-west-2a', u'ami_launch_index': u'0', u'dns_name': u'ec2-52-25-24-80.us-west-2.compute.amazonaws.com', u'region': u'us-west-2', u'ebs_optimized': False, u'launch_time': u'2015-07-07T03:24:27.000Z', u'instance_type': u't2.micro', u'state': u'running', u'root_device_name': u'/dev/sda1', u'hypervisor': u'xen', u'virtualization_type': u'hvm', u'architecture': u'x86_64'})
+
+TASK: [Generate myid file] **************************************************** 
+changed: [127.0.0.1] => (item={u'ramdisk': None, u'kernel': None, u'root_device_type': u'ebs', u'private_dns_name': u'ip-172-31-25-14.us-west-2.compute.internal', u'tags': {}, u'key_name': u'ams_afan', u'public_ip': u'52.10.164.46', u'image_id': u'ami-d5f4f2e5', u'tenancy': u'default', u'private_ip': u'172.31.25.14', u'groups': {u'sg-75639a11': u'default'}, u'public_dns_name': u'ec2-52-10-164-46.us-west-2.compute.amazonaws.com', u'state_code': 16, u'id': u'i-b74a4d40', u'placement': u'us-west-2a', u'ami_launch_index': u'2', u'dns_name': u'ec2-52-10-164-46.us-west-2.compute.amazonaws.com', u'region': u'us-west-2', u'ebs_optimized': False, u'launch_time': u'2015-07-07T03:24:27.000Z', u'instance_type': u't2.micro', u'state': u'running', u'root_device_name': u'/dev/sda1', u'hypervisor': u'xen', u'virtualization_type': u'hvm', u'architecture': u'x86_64'})
+changed: [127.0.0.1] => (item={u'ramdisk': None, u'kernel': None, u'root_device_type': u'ebs', u'private_dns_name': u'ip-172-31-25-13.us-west-2.compute.internal', u'tags': {}, u'key_name': u'ams_afan', u'public_ip': u'52.25.233.47', u'image_id': u'ami-d5f4f2e5', u'tenancy': u'default', u'private_ip': u'172.31.25.13', u'groups': {u'sg-75639a11': u'default'}, u'public_dns_name': u'ec2-52-25-233-47.us-west-2.compute.amazonaws.com', u'state_code': 16, u'id': u'i-b64a4d41', u'placement': u'us-west-2a', u'ami_launch_index': u'1', u'dns_name': u'ec2-52-25-233-47.us-west-2.compute.amazonaws.com', u'region': u'us-west-2', u'ebs_optimized': False, u'launch_time': u'2015-07-07T03:24:27.000Z', u'instance_type': u't2.micro', u'state': u'running', u'root_device_name': u'/dev/sda1', u'hypervisor': u'xen', u'virtualization_type': u'hvm', u'architecture': u'x86_64'})
+changed: [127.0.0.1] => (item={u'ramdisk': None, u'kernel': None, u'root_device_type': u'ebs', u'private_dns_name': u'ip-172-31-25-12.us-west-2.compute.internal', u'tags': {}, u'key_name': u'ams_afan', u'public_ip': u'52.25.24.80', u'image_id': u'ami-d5f4f2e5', u'tenancy': u'default', u'private_ip': u'172.31.25.12', u'groups': {u'sg-75639a11': u'default'}, u'public_dns_name': u'ec2-52-25-24-80.us-west-2.compute.amazonaws.com', u'state_code': 16, u'id': u'i-b54a4d42', u'placement': u'us-west-2a', u'ami_launch_index': u'0', u'dns_name': u'ec2-52-25-24-80.us-west-2.compute.amazonaws.com', u'region': u'us-west-2', u'ebs_optimized': False, u'launch_time': u'2015-07-07T03:24:27.000Z', u'instance_type': u't2.micro', u'state': u'running', u'root_device_name': u'/dev/sda1', u'hypervisor': u'xen', u'virtualization_type': u'hvm', u'architecture': u'x86_64'})
+
+PLAY [newInstances] *********************************************************** 
+
+TASK: [unpack the zookeepr to destination servers] **************************** 
+changed: [172.31.25.12]
+changed: [172.31.25.13]
+changed: [172.31.25.14]
+
+TASK: [unpack the smoketest to destination servers] *************************** 
+changed: [172.31.25.12]
+changed: [172.31.25.14]
+changed: [172.31.25.13]
+
+TASK: [copy the configuration file to the detination servers] ***************** 
+changed: [172.31.25.14]
+changed: [172.31.25.12]
+changed: [172.31.25.13]
+
+TASK: [create zookeeper data dir] ********************************************* 
+changed: [172.31.25.14]
+changed: [172.31.25.12]
+changed: [172.31.25.13]
+
+TASK: [copy the my id file to the detination servers] ************************* 
+changed: [172.31.25.14]
+changed: [172.31.25.12]
+changed: [172.31.25.13]
+
+TASK: [start zookeeper service] *********************************************** 
+changed: [172.31.25.14]
+changed: [172.31.25.12]
+changed: [172.31.25.13]
+
+TASK: [pause seconds=120] ***************************************************** 
+(^C-c = continue early, ^C-a = abort)
+[172.31.25.14, 172.31.25.13, 172.31.25.12]
+Pausing for 120 seconds
+ok: [172.31.25.14]
+
+PLAY [newInstances[0]] ******************************************************** 
+
+TASK: [use smoketest to validate zookeeper] *********************************** 
+changed: [172.31.25.14]
+
+TASK: [debug msg="{{ result.stdout }}"] *************************************** 
+ok: [172.31.25.14] => {
+    "msg": "Connecting to  172.31.25.12:2181\nConnected in 266 ms, handle is 0\nConnecting to  172.31.25.13:2181\nConnected in 265 ms, handle is 1\nConnecting to  172.31.25.14:2181\nConnected in 431 ms, handle is 2\nConnecting to  172.31.25.12:2181\nConnected in 7 ms, handle is 3\nConnecting to  172.31.25.14:2181\nConnected in 22 ms, handle is 0\nSmoke test successful"
+}
+
+PLAY RECAP ******************************************************************** 
+127.0.0.1                  : ok=5    changed=3    unreachable=0    failed=0   
+172.31.25.12               : ok=7    changed=6    unreachable=0    failed=0   
+172.31.25.13               : ok=7    changed=6    unreachable=0    failed=0   
+172.31.25.14               : ok=9    changed=7    unreachable=0    failed=0   
+
